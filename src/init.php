@@ -12,7 +12,7 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
-
+require_once('block/render.php');
 /**
  * Enqueue Gutenberg block assets for both frontend + backend.
  *
@@ -30,7 +30,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 function decision_tree_cgb_block_assets() { // phpcs:ignore
 	// Register block styles for both frontend + backend.
 	wp_register_style(
-		'decision_tree-cgb-style-css', // Handle.
+		'coronalaw-decision_tree-style-css', // Handle.
 		plugins_url( 'dist/blocks.style.build.css', dirname( __FILE__ ) ), // Block style CSS.
 		is_admin() ? array( 'wp-editor' ) : null, // Dependency to include the CSS after it.
 		null // filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.style.build.css' ) // Version: File modification time.
@@ -38,7 +38,7 @@ function decision_tree_cgb_block_assets() { // phpcs:ignore
 
 	// Register block editor script for backend.
 	wp_register_script(
-		'decision_tree-cgb-block-js', // Handle.
+		'coronalaw-decision_tree-block-js', // Handle.
 		plugins_url( '/dist/blocks.build.js', dirname( __FILE__ ) ), // Block.build.js: We register the block here. Built with Webpack.
 		array( 'wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor' ), // Dependencies, defined above.
 		null, // filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.build.js' ), // Version: filemtime — Gets file modification time.
@@ -47,15 +47,23 @@ function decision_tree_cgb_block_assets() { // phpcs:ignore
 
 	// Register block editor styles for backend.
 	wp_register_style(
-		'decision_tree-cgb-block-editor-css', // Handle.
+		'coronalaw-decision_tree-block-editor-css', // Handle.
 		plugins_url( 'dist/blocks.editor.build.css', dirname( __FILE__ ) ), // Block editor CSS.
 		array( 'wp-edit-blocks' ), // Dependency to include the CSS after it.
 		null // filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.editor.build.css' ) // Version: File modification time.
 	);
 
+	wp_enqueue_script(
+		'coronalaw-decision_tree-script', // Handle.
+		plugins_url( 'src/block/decision-tree.js', dirname( __FILE__ ) ), 
+		array('jquery'), // Dependencies, defined above.
+		// filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.build.js' ), // Version: File modification time.
+		true // Enqueue the script in the footer.
+	);
+
 	// WP Localized globals. Use dynamic PHP stuff in JavaScript via `cgbGlobal` object.
 	wp_localize_script(
-		'decision_tree-cgb-block-js',
+		'coronalaw-decision_tree-block-js',
 		'cgbGlobal', // Array containing dynamic data for a JS Global.
 		[
 			'pluginDirPath' => plugin_dir_path( __DIR__ ),
@@ -75,13 +83,33 @@ function decision_tree_cgb_block_assets() { // phpcs:ignore
 	 * @since 1.16.0
 	 */
 	register_block_type(
-		'cgb/block-decision-tree', array(
+		'coronalaw/block-decision-tree', array(
 			// Enqueue blocks.style.build.css on both frontend & backend.
-			'style'         => 'decision_tree-cgb-style-css',
+			'style'         => 'coronalaw-decision_tree-style-css',
+			'script'		=> 'coronalaw-decision_tree-script',
 			// Enqueue blocks.build.js in the editor only.
-			'editor_script' => 'decision_tree-cgb-block-js',
+			'editor_script' => 'coronalaw-decision_tree-block-js',
 			// Enqueue blocks.editor.build.css in the editor only.
-			'editor_style'  => 'decision_tree-cgb-block-editor-css',
+			'editor_style'  => 'coronalaw-decision_tree-block-editor-css',
+			'render_callback' => 'coronalaw_decision_tree_render'
+		)
+	);
+
+	register_block_type(
+		'coronalaw/block-question', array(
+			'render_callback' => 'coronalaw_question_render'
+		)
+	);
+
+	register_block_type(
+		'coronalaw/block-choice', array(
+			'render_callback' => 'coronalaw_choice_render'
+		)
+	);
+
+	register_block_type(
+		'coronalaw/block-answer', array(
+			'render_callback' => 'coronalaw_answer_render'
 		)
 	);
 }

@@ -5,12 +5,10 @@
  * Simple block, renders and saves the same content without any interactivity.
  */
 
-//  Import CSS.
-import './editor.scss';
-import './style.scss';
 
 const { __ } = wp.i18n; // Import __() from wp.i18n
 const { registerBlockType } = wp.blocks; // Import registerBlockType() from wp.blocks
+const { InnerBlocks } = wp.blockEditor;
 
 /**
  * Register: aa Gutenberg Block.
@@ -25,16 +23,22 @@ const { registerBlockType } = wp.blocks; // Import registerBlockType() from wp.b
  * @return {?WPBlock}          The block, if it has been successfully
  *                             registered; otherwise `undefined`.
  */
-registerBlockType( 'cgb/block-decision-tree', {
+registerBlockType( 'coronalaw/block-answer', {
 	// Block name. Block names must be string that contains a namespace prefix. Example: my-plugin/my-custom-block.
-	title: __( 'decision-tree - CGB Block' ), // Block title.
-	icon: 'shield', // Block icon from Dashicons → https://developer.wordpress.org/resource/dashicons/.
-	category: 'common', // Block category — Group blocks together based on common traits E.g. common, formatting, layout widgets, embed.
+	title: __( 'Antwort' ), // Block title.
+	icon: 'palmtree', // Block icon from Dashicons → https://developer.wordpress.org/resource/dashicons/.
+	category: 'layout', // Block category — Group blocks together based on common traits E.g. common, formatting, layout widgets, embed.
 	keywords: [
-		__( 'decision-tree — CGB Block' ),
-		__( 'CGB Example' ),
-		__( 'create-guten-block' ),
-	],
+		__( 'Antwort' ),
+		__( 'CoronaLaw' ),
+    ],
+    parent: ['coronalaw/block-decision-tree'],
+    attributes: {
+        answer: {
+            type: 'string',
+            default: ''
+		}
+    },
 
 	/**
 	 * The edit function describes the structure of your block in the context of the editor.
@@ -47,23 +51,11 @@ registerBlockType( 'cgb/block-decision-tree', {
 	 * @param {Object} props Props.
 	 * @returns {Mixed} JSX Component.
 	 */
-	edit: ( props ) => {
-		// Creates a <p class='wp-block-cgb-block-decision-tree'></p>.
+	edit: function( props ) {
 		return (
-			<div className={ props.className }>
-				<p>— Hello from the backend.</p>
-				<p>
-					CGB BLOCK: <code>decision-tree</code> is a new Gutenberg block
-				</p>
-				<p>
-					It was created via{ ' ' }
-					<code>
-						<a href="https://github.com/ahmadawais/create-guten-block">
-							create-guten-block
-						</a>
-					</code>.
-				</p>
-			</div>
+            <article className={ props.className + " decision-tree__answer" }>
+				<InnerBlocks />
+            </article>
 		);
 	},
 
@@ -78,22 +70,7 @@ registerBlockType( 'cgb/block-decision-tree', {
 	 * @param {Object} props Props.
 	 * @returns {Mixed} JSX Frontend HTML.
 	 */
-	save: ( props ) => {
-		return (
-			<div className={ props.className }>
-				<p>— Hello from the frontend.</p>
-				<p>
-					CGB BLOCK: <code>decision-tree</code> is a new Gutenberg block.
-				</p>
-				<p>
-					It was created via{ ' ' }
-					<code>
-						<a href="https://github.com/ahmadawais/create-guten-block">
-							create-guten-block
-						</a>
-					</code>.
-				</p>
-			</div>
-		);
-	},
+	save: function( props ) {
+		return <InnerBlocks.Content />;
+	}
 } );

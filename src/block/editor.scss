@@ -5,11 +5,18 @@
  * which makes it higher in priority.
  */
 
-.wp-block-cgb-block-decision-tree  {
-  background: $green;
-  border: 0.2rem solid $black;
-  color: $black;
-  margin: 0 auto;
-  max-width: 740px;
-  padding: 2rem;
+.choice__menu {
+  display: inline-block;
+  vertical-align: sub;
+}
+
+.decision-tree__choice .block-editor-inner-blocks {
+
+  margin-left: 30px;
+
+}
+
+.decision-tree__question {
+  border: 1px solid gray;
+  padding: 10px;
 }

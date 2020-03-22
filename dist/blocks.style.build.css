@@ -9,10 +9,14 @@
  *
  * CSS for both Frontend+Backend.
  */
-.wp-block-cgb-block-decision-tree {
-  background: orangered;
-  border: 0.2rem solid #292929;
-  color: #292929;
-  margin: 0 auto;
-  max-width: 740px;
-  padding: 2rem; }
+.coronalaw__question, .coronalaw__answer {
+  display: none; }
+
+.coronalaw__decision-tree > .coronalaw__question:first-child {
+  display: block; }
+
+.coronalaw__choice--selected button {
+  background: green; }
+
+.coronalaw__choice--not-selected button {
+  background: red; }
