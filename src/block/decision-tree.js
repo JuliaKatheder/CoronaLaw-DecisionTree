@@ -10,7 +10,7 @@ jQuery(document).ready(function(){
 
                 // Set display classes
                 element.removeClass('coronalaw__choice--not-selected').addClass('coronalaw__choice--selected');
-                element.siblings().addClass('coronalaw__choice--not-selected')
+                element.siblings().removeClass('coronalaw__choice--selected').addClass('coronalaw__choice--not-selected');
 
                 // Remove nodes from subtree
                 element.parent().nextAll().remove();

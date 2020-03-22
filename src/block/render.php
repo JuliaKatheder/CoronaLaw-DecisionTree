@@ -26,7 +26,6 @@ function coronalaw_choice_render( $attributes, $content ) {
 function coronalaw_answer_render( $attributes, $content ) {
     return '
         <div class="coronalaw__answer coronalaw__node">
-            <h1>Antwort</h1>
             '. $content .'
         </div>';;
 }

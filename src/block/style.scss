@@ -12,10 +12,36 @@
   display: block;
 }
 
-.coronalaw__choice--selected button {
-  background: green;
+.coronalaw__choice button,
+.coronalaw__decision-tree h1,
+.coronalaw__answer * {
+  text-align: left;
+  font:  30px/36px 'HKGrotesk Regular';
+  letter-spacing: 0.3px;
+  color: #101010;
 }
 
-.coronalaw__choice--not-selected button {
-  background: red;
+.coronalaw__choice button {
+  background: white;
+  border: 2px solid #101010;
+  padding: .5rem 1.5rem;
+  margin-bottom: 1rem;
+  width: 500px;
 }
+
+.coronalaw__choice--selected button {
+  background: #4D4D4D;
+  color: white;
+}
+
+.coronalaw__answer {
+  margin-top: 100px;
+}
+
+.coronalaw__node {
+  margin-bottom: 100px;
+}
+
+// .coronalaw__choice--not-selected button {
+//   background: red;
+// }
