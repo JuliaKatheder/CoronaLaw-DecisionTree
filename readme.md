@@ -6,7 +6,7 @@ Dieses WordPress Plugin wurde innerhalb des Hackathons #WirVsVirus der Bundesreg
 ![Screenshot des Entscheidungsbaums auf der Website](https://www.coronalaw.eu/wp-content/uploads/2020/03/decision-tree.png)
 
 ## CoronaLaw Theme
-Innerhalb des Hackathons wurde außerdem ein WordPress Theme entwickelt [CoronaLaw Theme Repository](https://github.com/JuliaKatheder/CoronaLaw-DecisionTree).
+Innerhalb des Hackathons wurde außerdem ein WordPress Theme entwickelt [CoronaLaw Theme Repository](https://github.com/JuliaKatheder/CoronaLaw).
 
 ## Challenge
 
